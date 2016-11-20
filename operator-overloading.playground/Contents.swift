@@ -6,28 +6,28 @@
 //
 
 func *(lhs: String, rhs: Int) -> String {
-  var result = lhs
-  for _ in 2...rhs {
-    result += lhs
-  }
-  return result
+    var result = lhs
+    for _ in 2...rhs {
+        result += lhs
+    }
+    return result
 }
 let u = "abc"
 let v = u * 5
 
 protocol Type {
-  func +=(inout lhs: Self, rhs: Self)
+    static func +=( lhs: inout Self, rhs: Self)
 }
 extension String: Type {}
 extension Int: Type {}
 extension Double: Type {}
 extension Float: Type {}
 func *<T: Type>(lhs: T, rhs: Int) -> T {
-  var result = lhs
-  for _ in 2...rhs {
-    result += lhs
-  }
-  return result
+    var result = lhs
+    for _ in 2...rhs {
+        result += lhs
+    }
+    return result
 }
 let x = "abc"
 let y = x * 5
@@ -38,13 +38,13 @@ let d = c * 5
 let e: Float = 4.56
 let f = e * 5
 
-infix operator ** {associativity left precedence 150}
+infix operator ** : DefaultPrecedence
 func **<T: Type>(lhs: T, rhs: Int) -> T {
-  var result = lhs
-  for _ in 2...rhs {
-    result += lhs
-  }
-  return result
+    var result = lhs
+    for _ in 2...rhs {
+        result += lhs
+    }
+    return result
 }
 let g = "abc"
 let h = g ** 5
@@ -55,9 +55,9 @@ let l = k ** 5
 let m: Float = 4.56
 let n = m ** 5
 
-infix operator **= {associativity left precedence 150}
-func **=<T: Type>(inout lhs: T, rhs: Int) {
-  lhs = lhs ** rhs
+infix operator **= : DefaultPrecedence
+func **=<T: Type>( lhs: inout T, rhs: Int) {
+    lhs = lhs ** rhs
 }
 var o = "abc"
 o **= 5
